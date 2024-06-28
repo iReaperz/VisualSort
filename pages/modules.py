@@ -1,10 +1,8 @@
-import numpy as np
 import plotly.graph_objects as go
 from shiny import Inputs, Outputs, Session, module, render, ui, reactive
 from shinywidgets import output_widget, render_widget
 from pages.server import bubble_vis, generate_random_array
-import asyncio
-
+from htmltools import HTML, div
 @module.ui
 def bubble_sort_ui():
     return ui.nav_panel(
@@ -29,22 +27,60 @@ def bubble_sort_ui():
                         id='sliderBubble',
                         label='Number of Beans',
                         min=3,
-                        max=100,
-                        value=10  # Установите начальное значение по умолчанию
+                        max=50,
+                        value=10
                     ),
                     style="display: flex; justify-content: flex-end; align-items: center;"
                 ),
-                style="display: flex; justify-content: space-between; align-items: center; margin-right: 20px"
+                style="display: flex; justify-content: space-between; align-items: center; margin-right: 20px;"
             ),
+            ui.card(output_widget("bubble")),
             ui.div(
-                output_widget("bubble")
+                ui.HTML(
+                    '<div class="card_bot">'
+                    '<div class="header">'
+                    '<div class="top">'
+                    '<div class="title">'
+                    '</div>'
+                    '</div>'
+                    '</div>'
+                    '<div class="code-container">'
+                    '<p id="title2">BubbleSort.py</p>'
+                    '<textarea class="area" id="code" name="code" readonly="">'
+                    'def bubble_sort(arr):\n'
+                    '    n = len(arr)\n'
+                    '    for i in range(n):\n'
+                    '        for j in range(0, n-i-1):\n'
+                    '            if arr[j] > arr[j+1]:\n'
+                    '                arr[j], arr[j+1] = arr[j+1], arr[j]\n'
+                    '    return arr\n'
+                    '</textarea>'
+                    '</div>'
+                    '</div>'
+                )
             )
-        )
-    )
+        ),
+        ui.HTML(
+            '<div class="container">'
+            '<ul class="link-list">'
+            '<li><a href="mailto:ireaperz07@gmail.com">Email</a></li>'
+            '<li><a href="https://www.linkedin.com/in/noy-simonyan-888683266/">LinkedIn</a></li>'
+            '<li><a href="https://github.com/iReaperz">Github</a></li>'
+            '</ul>'
+            '</div>'
+        )        
+)
+
+
+
 
 @module.server
 def bubble_server(input: Inputs, output: Outputs, session: Session):
-    fig = go.FigureWidget(data=[go.Bar(x=[], y=[])])
+    fig = go.FigureWidget(data=[go.Bar(x=[], y=[], marker_color='blue')])
+    fig.update_layout(plot_bgcolor='white')
+    fig.update_xaxes(fixedrange = True, visible = False)
+    fig.update_yaxes(fixedrange = True, visible = False)
+    arr = reactive.Value([])  # Reactive variable to store the array
     
     @render_widget
     def bubble():
@@ -53,25 +89,33 @@ def bubble_server(input: Inputs, output: Outputs, session: Session):
     @reactive.Effect
     @reactive.event(input.start)
     async def run_bubble_sort():
-        num_beans = input.sliderBubble()  # Получаем значение слайдера в реактивном контексте
-        await bubble_vis(num_beans, fig)
+        bubble_vis(arr(), fig)  # Use the reactive array in bubble_vis
     
     @reactive.Effect
     @reactive.event(input.shuffle)
     def shuffle_array():
         num_beans = input.sliderBubble()
-        arr = generate_random_array(num_beans)
-        fig.data[0].x = list(range(len(arr)))
-        fig.data[0].y = arr
+        new_arr = generate_random_array(num_beans)
+        arr.set(new_arr)  # Update the reactive array
+        fig.data[0].x = list(range(len(new_arr)))
+        fig.data[0].y = new_arr
+        fig.data[0].marker.color = 'blue'
+        fig.update_layout(plot_bgcolor='white')
+        fig.layout.xaxis.fixedrange = True
+        fig.layout.yaxis.fixedrange = True
 
-    # Инициализация графика при загрузке страницы
+    # Initialize the graph when the page loads
     @reactive.Effect
     def initialize_graph():
         num_beans = input.sliderBubble()
-        arr = generate_random_array(num_beans)
-        fig.data[0].x = list(range(len(arr)))
-        fig.data[0].y = arr
-
+        new_arr = generate_random_array(num_beans)
+        arr.set(new_arr)  # Update the reactive array
+        fig.data[0].x = list(range(len(new_arr)))
+        fig.data[0].y = new_arr
+        fig.data[0].marker.color = 'blue'
+        fig.update_layout(plot_bgcolor='white')
+        fig.layout.xaxis.fixedrange = True
+        fig.layout.yaxis.fixedrange = True
 
 
     

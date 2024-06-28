@@ -3,12 +3,12 @@ from pages.modules import bubble_sort_ui, selection_sort_ui, cocktail_sort_ui, g
 
 app_ui = ui.page_navbar(
     bubble_sort_ui("tab1"),
-    # selection_sort_ui("tab2"),
-    # cocktail_sort_ui("tab3"),
-    # gnome_sort_ui("tab4"),
-    # quick_sort_ui("tab5"),
-    # insertion_sort_ui("tab6"),
-    # odd_sort_ui("tab7"),
+    selection_sort_ui("tab2"),
+    cocktail_sort_ui("tab3"),
+    gnome_sort_ui("tab4"),
+    quick_sort_ui("tab5"),
+    insertion_sort_ui("tab6"),
+    odd_sort_ui("tab7"),
     id="tabs",
     header=ui.tags.head(
         ui.tags.link(
