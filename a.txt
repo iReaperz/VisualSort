@@ -1,9 +1,0 @@
---bs-btn-hover-border-color: #6f6c6c;
---bs-btn-color: white;
-  --bs-btn-border-color: #888787;
-
-
-rgb(14, 22, 33) темно синий
-rgb(33, 58, 72) бледно голбуой
-rgb(24, 37, 51) поярче темно синего
-rgb(43, 82, 120) ярко-голубой
