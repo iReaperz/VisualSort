@@ -4,7 +4,7 @@
 .sort-text {
     font-size: 52px;
     margin-left: 40px;
-    color: #333;
+    color: white;
     font-family: "Merriweather", serif;
 }
 
@@ -12,12 +12,27 @@
     flex-grow: 0;
 }
 .navbar-nav{
-    --bs-nav-link-color: rgb(0, 0, 0);
+    --bs-nav-link-color: rgb(255, 255, 255);
     --bs-nav-link-hover-color: rgb(86, 17, 103);
+}
+.navbar-brand{
+  padding-left: 40px;
+}
+
+.control-label{
+  color: white;
 }
 
 .navbar {
     --bs-navbar-active-color: rgb(60, 63, 219);
+}
+.irs--shiny .irs-min, .irs--shiny .irs-max {
+  color: white;
+}
+.btn-default:not(.btn-primary, .btn-secondary, .btn-info, .btn-success, .btn-danger, .btn-warning, .btn-light, .btn-dark, .btn-link, [class*="btn-outline-"]){
+  --bs-btn-hover-border-color: #6f6c6c;
+  --bs-btn-color: white;
+  --bs-btn-border-color: #888787;
 }
 
 .form-group.shiny-input-container {
@@ -33,16 +48,24 @@
     font-size: 20px; /* Размер шрифта для ссылок в navbar */
 }
 
-.footnote{
-    
+.navbar.navbar-default {
+  background-color: rgb(23, 33, 43) !important;
 }
 
+.card{
+  --bs-card-border-color: rgb(24, 37, 51);
+  background-color:rgb(24, 37, 51);
+}
+
+.bslib-page-navbar{
+  background-color:rgb(14, 22, 33);
+}
 
 .card_bot {
     width: 100%;
-    height: 400px;
+    height: 500px;
     margin: 0 auto;
-    background-color: #24233b;
+    background-color: #17212b;
     border-radius: 8px;
     z-index: 1;
     box-shadow: 0px 10px 10px rgb(73, 70, 92);
@@ -74,19 +97,21 @@
     font-size: 15px;
     text-align: left !important;
   }
-  
+
   .code-container {
-    text-align: center;
+    text-align: center;    
   }
   #code {
     width: 90%;
-    height: 250px;
+    height: 380px;
     resize: none;
-    background-color: rgb(73, 70, 92);
+    background-color: rgb(33, 58, 72);
     border-radius: 5px;
     border: none;
     color: white;
-    padding: 10px;
+    padding: 30px;
+    overflow: hidden;       
+    white-space: pre;       
   }
   #code:focus {
     outline: none !important;
@@ -108,7 +133,7 @@
   }
   
   .link-list a {
-    color: black;
+    color: white;
     text-decoration: none;
     box-shadow: inset 0 -1px 0 hsla(0, 0%, 100%, 0.4);
   }
@@ -126,7 +151,6 @@
     animation: wave-animation 0.3s infinite;
   }
   
-  /* below is just for demo styling */
   
   .container {
     display: flex;
@@ -147,5 +171,36 @@
     75% {
       transform: rotate(-15deg);
     }
+  }
+
+  .animated-button {
+    background-color: #ffffff00;
+    color: #fff;
+    width: 8.5em;
+    height: 2.9em;
+    border: #3654ff 0.1em solid;
+    border-radius: 11px;
+    text-align: center;
+    transition: all 0.6s ease;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-right: 1em;
+  }
+  
+  .animated-button:hover {
+    background-color: #3654ff;
+    cursor: pointer;
+  }
+  
+  .animated-button svg {
+    width: 1.6em;
+    margin: -0.2em 0.8em 1em;
+    position: absolute;
+    display: flex;
+    transition: all 0.6s ease;
+  }
+  
+  .animated-button:hover svg {
+    transform: translateX(5px);
   }
   
