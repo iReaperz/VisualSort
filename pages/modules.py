@@ -4,7 +4,7 @@ from shiny import Inputs, Outputs, Session, module, render, ui, reactive
 from shinywidgets import output_widget, render_widget
 from pages.server import bubble_vis, selection_vis, insertion_vis, quick_vis, odd_even_vis, gnome_vis, cocktail_vis, generate_random_array
 
-def sorting_panel_ui(sort_type, default_code):
+def sorting_panel_ui(sort_type, default_code, desc, worst, space, best, average):
     return ui.nav_panel(
         sort_type + " Sort",
         ui.card(
@@ -36,6 +36,34 @@ def sorting_panel_ui(sort_type, default_code):
             ),
             ui.card(output_widget(f"{sort_type.lower()}")),
             ui.div(
+                ui.div(ui.HTML(desc),
+                       ui.HTML(f'''
+                            <div class="leftDiv">
+                                <div class="table-box">
+                                    <div style="font-family: 'Jura', Courier, monospace; font-size: 35px;text-align: right;">COMPLEXITY</div>
+                                    <table class="sort-table aos-init aos-animate" data-aos="flip-left" style="border-collapse: collapse; width: 100%; font-family: 'Jura', Courier, monospace; font-size: 16px;">
+                                        <tbody>
+                                            <tr style="border-bottom: 1px solid #ccc;">
+                                                <th style="padding: 10px;">Average Complexity</th>
+                                                <td style="padding: 10px; text-align: right;">{average}</td>
+                                            </tr>
+                                            <tr style="border-bottom: 1px solid #ccc;">
+                                                <th style="padding: 10px;">Best Case</th>
+                                                <td style="padding: 10px; text-align: right;">{best}</td>
+                                            </tr>
+                                            <tr style="border-bottom: 1px solid #ccc;">
+                                                <th style="padding: 10px;">Worst Case</th>
+                                                <td style="padding: 10px; text-align: right;">{worst}</td>
+                                            </tr>
+                                            <tr style="border-bottom: 1px solid #ccc;">
+                                                <th style="padding: 10px;">Space Complexity</th>
+                                                <td style="padding: 10px; text-align: right;">{space}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>'''),
+                       class_ ='description'),
                 ui.div(
                     ui.HTML(
                         f'<div class="card_bot {sort_type.lower()}">'
@@ -82,7 +110,18 @@ def bubble_sort_ui():
                 arr[j], arr[j+1] = arr[j+1], arr[j]
     return arr
     """
-    return sorting_panel_ui("Bubble", default_code)
+    description_html = """
+        <div class="description" style="font-family: 'Jura', Courier, monospace; font-size: 16px;">
+            <div class="rightDiv">
+                <div style="font-family: 'Jura', Courier, monospace; font-size: 35px;">DESCRIPTION</div>
+                <p>Bubble Sort is a straightforward and inefficient sorting algorithm.</p>
+                <p>It works by repeatedly stepping through the list of items to be sorted, comparing adjacent items, and swapping them if they are in the wrong order.</p>
+                <p>This process is repeated until the list is sorted. Bubble Sort gets its name because smaller elements "bubble" to the top of the list with each pass.</p>
+                <p>While easy to understand and implement, Bubble Sort is not suitable for large datasets due its time complexity.</p>
+            </div>
+        </div>
+    """    
+    return sorting_panel_ui("Bubble", default_code, description_html, average="O(log<sup>2</sup> n)", best = "O(log<sup>2</sup> n)", worst = "O(log<sup>2</sup> n)", space = "O(n × log<sup>2</sup> n)")
 
 @module.server
 def bubble_server(input: Inputs, output: Outputs, session: Session):
@@ -140,7 +179,18 @@ def selection_sort_ui():
         arr[i], arr[min_idx] = arr[min_idx], arr[i]
     return arr
     """
-    return sorting_panel_ui("Selection", default_code)
+    description_html = """
+        <div class="description" style="font-family: 'Jura', Courier, monospace; font-size: 16px;">
+            <div class="rightDiv">
+                <div style="font-family: 'Jura', Courier, monospace; font-size: 35px;">DESCRIPTION</div>
+                    <p>Selection Sort is a simple and inefficient sorting algorithm.</p>
+                    <p>It works by repeatedly stepping through the list of items to be sorted, finding the minimum element from the unsorted part, and swapping it with the first unsorted element.</p>
+                    <p>This process is repeated until the entire list is sorted. Selection Sort gets its name because it repeatedly selects the smallest remaining element.</p>
+                    <p>While easy to understand and implement, Selection Sort is not suitable for large datasets due to its O(n^2) time complexity, where n is the number of items being sorted.</p>
+            </div>
+        </div>
+    """    
+    return sorting_panel_ui("Selection", default_code, description_html, average="O(n<sup>2</sup>)", best = "O(n<sup>2</sup>)", worst = "O(n<sup>2</sup>)", space = "O(1)")
 
 @module.server
 def selection_server(input: Inputs, output: Outputs, session: Session):
@@ -199,7 +249,17 @@ def insertion_sort_ui():
         arr[j + 1] = key
     return arr
     """
-    return sorting_panel_ui("Insertion", default_code)
+    description_html = """
+        <div class="description" style="font-family: 'Jura', Courier, monospace; font-size: 16px;">
+            <div class="rightDiv">
+                <div style="font-family: 'Jura', Courier, monospace; font-size: 35px;">DESCRIPTION</div>
+                <p>Insertion Sort is a straightforward and efficient sorting algorithm for small datasets.</p>
+<p>It works by building a sorted array one element at a time, taking each new element and inserting it into its correct position among the already-sorted elements.</p>
+<p>This process is repeated until the entire list is sorted. Insertion Sort gets its name from the way it inserts elements into the sorted portion of the list.</p>
+<p>While efficient for small or nearly sorted datasets, Insertion Sort is not suitable for large datasets due to its O(n^2) time complexity in the average and worst cases, where n is the number of items being sorted.</p> </div>
+        </div>
+    """    
+    return sorting_panel_ui("Insertion", default_code, description_html, average="O(n^2)", best="O(n)", worst="O(n^2)", space="O(1)")
 
 @module.server
 def insertion_server(input: Inputs, output: Outputs, session: Session):
@@ -278,7 +338,17 @@ def quick_sort(array, start, end):
     quick_sort(array, p+1, end)
 
     """
-    return sorting_panel_ui("Quick", default_code)
+    description_html = """
+        <div class="description" style="font-family: 'Jura', Courier, monospace; font-size: 16px;">
+            <div class="rightDiv">
+                <div style="font-family: 'Jura', Courier, monospace; font-size: 35px;">DESCRIPTION</div>
+    <p>Quick Sort is a highly efficient and widely used sorting algorithm.</p>
+<p>It works by selecting a 'pivot' element from the list and partitioning the other elements into two sub-arrays, according to whether they are less than or greater than the pivot.</p>
+<p>This process is recursively applied to the sub-arrays until the entire list is sorted. Quick Sort gets its name from the quick partitioning process.</p>
+<p>While very efficient with an average and best-case time complexity of O(n log n), Quick Sort can degrade to O(n^2) in the worst case. However, this is rare if a good pivot selection strategy is used. Its space complexity is O(log n).</p>           </div>
+        </div>
+    """    
+    return sorting_panel_ui("Quick", default_code, description_html, average="O(n log n)", best="O(n log n)", worst="O(n^2)", space="O(log n)")
 
 @module.server
 def quick_server(input: Inputs, output: Outputs, session: Session):
@@ -341,7 +411,17 @@ def odd_sort_ui():
                 L[i], L[i+1] = L[i+1], L[i]
                 sorted = False
     """
-    return sorting_panel_ui("Odd", default_code)
+    description_html = """
+        <div class="description" style="font-family: 'Jura', Courier, monospace; font-size: 16px;">
+            <div class="rightDiv">
+                <div style="font-family: 'Jura', Courier, monospace; font-size: 35px;">DESCRIPTION</div>
+              <p>Odd-Even Sort, also known as Brick Sort, is a variation of the Bubble Sort algorithm.</p>
+<p>It works by performing pairwise comparisons of elements in two phases: first comparing elements at odd indices with their next neighbors, then comparing elements at even indices with their next neighbors.</p>
+<p>This alternating process is repeated until the list is sorted. Odd-Even Sort derives its name from the alternating pattern of comparisons.</p>
+<p>While conceptually simple, Odd-Even Sort has a time complexity of O(n^2) in the average and worst cases, making it inefficient for large datasets. It has a space complexity of O(1), as it sorts in place.</p>  </div>
+        </div>
+    """    
+    return sorting_panel_ui("Odd", default_code, description_html, average="O(n^2)", best="O(n)", worst="O(n^2)", space="O(1)")
 
 @module.server
 def odd_server(input: Inputs, output: Outputs, session: Session):
@@ -401,7 +481,19 @@ def gnome_sort_ui():
             arr[index], arr[index-1] = arr[index-1], arr[index]
             index = index - 1
     """
-    return sorting_panel_ui("Gnome", default_code)
+    description_html = """
+        <div class="description" style="font-family: 'Jura', Courier, monospace; font-size: 16px;">
+            <div class="rightDiv">
+                <div style="font-family: 'Jura', Courier, monospace; font-size: 35px;">DESCRIPTION</div>
+       <p>Gnome Sort, also known as Stupid Sort, is a simple sorting algorithm that is similar to Insertion Sort.</p>
+<p>It works by repeatedly moving backward through the list, comparing adjacent elements, and swapping them if they are in the wrong order.</p>
+<p>If a swap is made, it then moves one step backward; otherwise, it moves one step forward and repeats the process.</p>
+<p>This process continues until the entire list is sorted. Gnome Sort gets its name from the way it moves elements around like a gnome sorting books on a shelf.</p>
+<p>While easy to understand and implement, Gnome Sort has an average and worst-case time complexity of O(n^2), making it inefficient for large datasets. It has a space complexity of O(1), as it sorts in place.</p>
+     </div>
+        </div>
+    """    
+    return sorting_panel_ui("Gnome", default_code, description_html, average="O(n^2)", best="O(n)", worst="O(n^2)", space="O(1)")
 
 @module.server
 def gnome_server(input: Inputs, output: Outputs, session: Session):
@@ -475,7 +567,18 @@ def cocktail_sort_ui():
                 swapped = True
         start = start + 1
     """
-    return sorting_panel_ui("Cocktail", default_code)
+    description_html = """
+        <div class="description" style="font-family: 'Jura', Courier, monospace; font-size: 16px;">
+            <div class="rightDiv">
+                <div style="font-family: 'Jura', Courier, monospace; font-size: 35px;">DESCRIPTION</div>
+       <p>Cocktail Sort, also known as Bidirectional Bubble Sort or Cocktail Shaker Sort, is a variation of Bubble Sort.</p>
+<p>It works by moving both forward and backward through the list, repeatedly stepping through the list of items to be sorted, comparing adjacent items, and swapping them if they are in the wrong order.</p>
+<p>This bidirectional process is repeated until the list is sorted. Cocktail Sort gets its name from the way elements "bubble" up and down through the list like cocktail shakers.</p>
+<p>While it improves on the standard Bubble Sort by making passes in both directions, Cocktail Sort still has an average and worst-case time complexity of O(n^2), making it inefficient for large datasets. It has a space complexity of O(1), as it sorts in place.</p>
+     </div>
+        </div>
+    """    
+    return sorting_panel_ui("Cocktail", default_code, description_html, average="O(n^2)", best="O(n)", worst="O(n^2)", space="O(1)")
 
 @module.server
 def cocktail_server(input: Inputs, output: Outputs, session: Session):
