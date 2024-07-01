@@ -409,7 +409,7 @@ def odd_sort_ui():
         for i in range(0, len(L)-1, 2):
             if L[i] > L[i+1]:
                 L[i], L[i+1] = L[i+1], L[i]
-                sorted = False
+                sorted = False  
     """
     description_html = """
         <div class="description" style="font-family: 'Jura', Courier, monospace; font-size: 16px;">

@@ -223,18 +223,35 @@
   }
   
 .card_bot.cocktail {
-    height: 750px;
+    height: 810px;
+}
+.card_bot.odd {
+  height: 750px;
+}
+.card_bot.gnome {
+  height: 600px;
 }
 .card_bot.quick {
     height: 820px;
 }
 
 .code.cocktail-code {
-    height: 650px;
+    height:700px;
 }
+
+.code.odd-code {
+  height:630px;
+}
+.code.selection-code {
+  height:430px;
+}
+
 
 .code.quick-code {
     height: 715px;
+}
+.code.gnome-code {
+  height: 420px;
 }
 
 .code.selection-code {

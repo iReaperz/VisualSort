@@ -34,6 +34,74 @@ function showCode(language, sortType) {
             j -= 1
         arr[j + 1] = key
     return arr`;
+            } else if (sortType === 'cocktail') {
+                code = `def cocktail_sort(arr):
+    n = len(arr)
+    swapped = True
+    start = 0
+    end = n-1
+    while swapped:
+        swapped = False
+        for i in range(start, end):
+            if arr[i] > arr[i+1]:
+                arr[i], arr[i+1] = arr[i+1], arr[i]
+                swapped = True
+        if not swapped:
+            break
+        swapped = False
+        end -= 1
+        for i in range(end-1, start-1, -1):
+            if arr[i] > arr[i+1]:
+                arr[i], arr[i+1] = arr[i+1], arr[i]
+                swapped = True
+        start += 1
+    return arr`;
+            } else if (sortType === 'gnome') {
+                code = `def gnome_sort(arr):
+    n = len(arr)
+    index = 0
+    while index < n:
+        if index == 0 or arr[index] >= arr[index-1]:
+            index += 1
+        else:
+            arr[index], arr[index-1] = arr[index-1], arr[index]
+            index -= 1
+    return arr`;
+            } else if (sortType === 'quick') {
+                code = `def quick_sort(arr):
+    def partition(arr, low, high):
+        i = low - 1
+        pivot = arr[high]
+        for j in range(low, high):
+            if arr[j] <= pivot:
+                i += 1
+                arr[i], arr[j] = arr[j], arr[i]
+        arr[i + 1], arr[high] = arr[high], arr[i + 1]
+        return i + 1
+
+    def quick_sort_recursive(arr, low, high):
+        if low < high:
+            pi = partition(arr, low, high)
+            quick_sort_recursive(arr, low, pi - 1)
+            quick_sort_recursive(arr, pi + 1, high)
+    
+    quick_sort_recursive(arr, 0, len(arr) - 1)
+    return arr`;
+            } else if (sortType === 'odd') {
+                code = `def odd_even_sort(arr):
+    n = len(arr)
+    is_sorted = False
+    while not is_sorted:
+        is_sorted = True
+        for i in range(1, n-1, 2):
+            if arr[i] > arr[i+1]:
+                arr[i], arr[i+1] = arr[i+1], arr[i]
+                is_sorted = False
+        for i in range(0, n-1, 2):
+            if arr[i] > arr[i+1]:
+                arr[i], arr[i+1] = arr[i+1], arr[i]
+                is_sorted = False
+    return arr`;
             }
             break;
         case 'java':
@@ -82,6 +150,105 @@ function showCode(language, sortType) {
         }
     }
 }`;
+            } else if (sortType === 'cocktail') {
+                code = `public class CocktailSort {
+    public static void cocktailSort(int[] arr) {
+        boolean swapped = true;
+        int start = 0;
+        int end = arr.length;
+        while (swapped) {
+            swapped = false;
+            for (int i = start; i < end - 1; i++) {
+                if (arr[i] > arr[i + 1]) {
+                    int temp = arr[i];
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = temp;
+                    swapped = true;
+                }
+            }
+            if (!swapped) break;
+            swapped = false;
+            end--;
+            for (int i = end - 1; i >= start; i--) {
+                if (arr[i] > arr[i + 1]) {
+                    int temp = arr[i];
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = temp;
+                    swapped = true;
+                }
+            }
+            start++;
+        }
+    }
+}`;
+            } else if (sortType === 'gnome') {
+                code = `public class GnomeSort {
+    public static void gnomeSort(int[] arr) {
+        int index = 0;
+        while (index < arr.length) {
+            if (index == 0 || arr[index] >= arr[index - 1]) {
+                index++;
+            } else {
+                int temp = arr[index];
+                arr[index] = arr[index - 1];
+                arr[index - 1] = temp;
+                index--;
+            }
+        }
+    }
+}`;
+            } else if (sortType === 'quick') {
+                code = `public class QuickSort {
+    public static void quickSort(int[] arr, int low, int high) {
+        if (low < high) {
+            int pi = partition(arr, low, high);
+            quickSort(arr, low, pi - 1);
+            quickSort(arr, pi + 1, high);
+        }
+    }
+
+    private static int partition(int[] arr, int low, int high) {
+        int pivot = arr[high];
+        int i = low - 1;
+        for (int j = low; j < high; j++) {
+            if (arr[j] <= pivot) {
+                i++;
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        int temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+        return i + 1;
+    }
+}`;
+            } else if (sortType === 'odd') {
+                code = `public class OddEvenSort {
+    public static void oddEvenSort(int[] arr) {
+        boolean isSorted = false;
+        while (!isSorted) {
+            isSorted = true;
+            for (int i = 1; i < arr.length - 1; i += 2) {
+                if (arr[i] > arr[i + 1]) {
+                    int temp = arr[i];
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = temp;
+                    isSorted = false;
+                }
+            }
+            for (int i = 0; i < arr.length - 1; i += 2) {
+                if (arr[i] > arr[i + 1]) {
+                    int temp = arr[i];
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = temp;
+                    isSorted = false;
+                }
+            }
+        }
+    }
+}`;
             }
             break;
         case 'cpp':
@@ -121,6 +288,98 @@ function showCode(language, sortType) {
             j = j - 1;
         }
         arr[j + 1] = key;
+    }
+}`;
+            } else if (sortType === 'cocktail') {
+                code = `void cocktailSort(int arr[], int n) {
+    bool swapped = true;
+    int start = 0;
+    int end = n - 1;
+    while (swapped) {
+        swapped = false;
+        for (int i = start; i < end; i++) {
+            if (arr[i] > arr[i + 1]) {
+                int temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+                swapped = true;
+            }
+        }
+        if (!swapped)
+            break;
+        swapped = false;
+        end--;
+        for (int i = end - 1; i >= start; i--) {
+            if (arr[i] > arr[i + 1]) {
+                int temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+                swapped = true;
+            }
+        }
+        start++;
+    }
+}`;
+            } else if (sortType === 'gnome') {
+                code = `void gnomeSort(int arr[], int n) {
+    int index = 0;
+    while (index < n) {
+        if (index == 0 || arr[index] >= arr[index - 1]) {
+            index++;
+        } else {
+            int temp = arr[index];
+            arr[index] = arr[index - 1];
+            arr[index - 1] = temp;
+            index--;
+        }
+    }
+}`;
+            } else if (sortType === 'quick') {
+                code = `void quickSort(int arr[], int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+
+int partition(int arr[], int low, int high) {
+    int pivot = arr[high];
+    int i = (low - 1);
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j] <= pivot) {
+            i++;
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+    int temp = arr[i + 1];
+    arr[i + 1] = arr[high];
+    arr[high] = temp;
+    return (i + 1);
+}`;
+            } else if (sortType === 'odd') {
+                code = `void oddEvenSort(int arr[], int n) {
+    bool isSorted = false;
+    while (!isSorted) {
+        isSorted = true;
+        for (int i = 1; i < n - 1; i += 2) {
+            if (arr[i] > arr[i + 1]) {
+                int temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+                isSorted = false;
+            }
+        }
+        for (int i = 0; i < n - 1; i += 2) {
+            if (arr[i] > arr[i + 1]) {
+                int temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+                isSorted = false;
+            }
+        }
     }
 }`;
             }
@@ -168,6 +427,101 @@ function showCode(language, sortType) {
     }
     return arr;
 }`;
+            } else if (sortType === 'cocktail') {
+                code = `function cocktailSort(arr) {
+    var swapped = true;
+    var start = 0;
+    var end = arr.length;
+    while (swapped) {
+        swapped = false;
+        for (var i = start; i < end - 1; i++) {
+            if (arr[i] > arr[i + 1]) {
+                var temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+                swapped = true;
+            }
+        }
+        if (!swapped) break;
+        swapped = false;
+        end--;
+        for (var i = end - 1; i >= start; i--) {
+            if (arr[i] > arr[i + 1]) {
+                var temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+                swapped = true;
+            }
+        }
+        start++;
+    }
+    return arr;
+}`;
+            } else if (sortType === 'gnome') {
+                code = `function gnomeSort(arr) {
+    var index = 0;
+    while (index < arr.length) {
+        if (index === 0 || arr[index] >= arr[index - 1]) {
+            index++;
+        } else {
+            var temp = arr[index];
+            arr[index] = arr[index - 1];
+            arr[index - 1] = temp;
+            index--;
+        }
+    }
+    return arr;
+}`;
+            } else if (sortType === 'quick') {
+                code = `function quickSort(arr, left = 0, right = arr.length - 1) {
+    if (left < right) {
+        var pivotIndex = partition(arr, left, right);
+        quickSort(arr, left, pivotIndex - 1);
+        quickSort(arr, pivotIndex + 1, right);
+    }
+    return arr;
+}
+
+function partition(arr, left, right) {
+    var pivot = arr[right];
+    var i = left - 1;
+    for (var j = left; j < right; j++) {
+        if (arr[j] <= pivot) {
+            i++;
+            var temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+    var temp = arr[i + 1];
+    arr[i + 1] = arr[right];
+    arr[right] = temp;
+    return i + 1;
+}`;
+            } else if (sortType === 'odd') {
+                code = `function oddEvenSort(arr) {
+    var isSorted = false;
+    while (!isSorted) {
+        isSorted = true;
+        for (var i = 1; i < arr.length - 1; i += 2) {
+            if (arr[i] > arr[i + 1]) {
+                var temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+                isSorted = false;
+            }
+        }
+        for (var i = 0; i < arr.length - 1; i += 2) {
+            if (arr[i] > arr[i + 1]) {
+                var temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+                isSorted = false;
+            }
+        }
+    }
+    return arr;
+}`;
             }
             break;
     }
@@ -197,8 +551,7 @@ app_ui = ui.page_navbar(
             src="https://i.ibb.co/tBPLYFn/logo-cropped.png",
             width="150",
             height="70"
-        ),
-        href="hpass"
+        )
     )
 )
 
