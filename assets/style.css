@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;700&display=swap");
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
 @import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap");
+
 .sort-text {
     font-size: 52px;
     margin-left: 40px;
@@ -13,7 +14,7 @@
 }
 .navbar-nav{
     --bs-nav-link-color: rgb(255, 255, 255);
-    --bs-nav-link-hover-color: rgb(86, 17, 103);
+    --bs-nav-link-hover-color: rgb(71, 60, 93);
 }
 .navbar-brand{
   padding-left: 40px;
@@ -24,11 +25,28 @@
 }
 
 .navbar {
-    --bs-navbar-active-color: rgb(60, 63, 219);
+    --bs-navbar-active-color: rgb(140, 82, 255);
 }
 .irs--shiny .irs-min, .irs--shiny .irs-max {
   color: white;
 }
+
+
+.irs--shiny .irs-bar {
+    border-top: 1px solid rgb(140, 82, 255);
+    border-bottom: 1px solid rgb(140, 82, 255);
+    background: rgb(140, 82, 255);
+}
+
+.irs--shiny .irs-handle {
+    background-color: rgb(140, 82, 255);
+}
+
+.irs--shiny .irs-from, .irs--shiny .irs-to, .irs--shiny .irs-single {
+    background-color: rgb(140, 82, 255);
+}
+
+
 .btn-default:not(.btn-primary, .btn-secondary, .btn-info, .btn-success, .btn-danger, .btn-warning, .btn-light, .btn-dark, .btn-link, [class*="btn-outline-"]){
   --bs-btn-hover-border-color: #6f6c6c;
   --bs-btn-color: white;
@@ -101,7 +119,7 @@
   .code-container {
     text-align: center;    
   }
-  #code {
+  .code {
     width: 90%;
     height: 380px;
     resize: none;
@@ -113,7 +131,7 @@
     overflow: hidden;       
     white-space: pre;       
   }
-  #code:focus {
+  .code:focus {
     outline: none !important;
   }
 
@@ -178,7 +196,7 @@
     color: #fff;
     width: 8.5em;
     height: 2.9em;
-    border: #3654ff 0.1em solid;
+    border: rgb(140, 82, 255) 0.1em solid;
     border-radius: 11px;
     text-align: center;
     transition: all 0.6s ease;
@@ -188,7 +206,7 @@
   }
   
   .animated-button:hover {
-    background-color: #3654ff;
+    background-color: rgb(140, 82, 255);
     cursor: pointer;
   }
   
@@ -204,3 +222,35 @@
     transform: translateX(5px);
   }
   
+.card_bot.cocktail {
+    height: 750px;
+}
+.card_bot.quick {
+    height: 820px;
+}
+
+.code.cocktail-code {
+    height: 650px;
+}
+
+.code.quick-code {
+    height: 715px;
+}
+
+.code.selection-code {
+    height: 390px;
+}
+
+@media (max-width: 900px) {
+    .tab-content {
+      width: 850px;
+    }
+}
+
+
+.navbar-toggler, .navbar-toggle {
+    border: var(--bs-border-width) solid white;
+}
+.navbar-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+  }

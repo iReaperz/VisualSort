@@ -4,7 +4,7 @@ import numpy as np
 def update_graph(fig, arr, current_index=None, min_index=None, final=False):
     if not final:
         colors = ['rgb(33, 58, 72)'] * len(arr)
-        if current_index is not None:
+        if current_index is not None and current_index < len(colors):
             colors[current_index] = 'red'
         if min_index is not None:
             colors[min_index] = 'rgb(23, 100, 77)'
@@ -21,6 +21,12 @@ def generate_random_array(size):
     arr = np.arange(1, size + 1)
     np.random.shuffle(arr)
     return arr 
+
+def is_sorted(array):
+    for i in range(len(array) - 1):
+        if array[i] > array[i + 1]:
+            return False
+    return True
 
 def bubble_vis(arr, fig):
     been_num_val = len(arr)
@@ -61,48 +67,119 @@ def insertion_vis(arr, fig):
     update_graph(fig, arr, final=True)
 
 
-# def partition(fig, array, start, end):
-#     pivot = array[start]
-#     low = start + 1
-#     high = end
+def partition(fig, array, start, end):
+    pivot = array[start]
+    low = start + 1
+    high = end
 
-#     while True:
-#         while low <= high and array[high] >= pivot:
-#             high = high - 1
-#             if high < len(array):
-#                 update_graph(fig, array, low)
-#             else:
-#                 update_graph(fig, array, low)
+    while True:
+        while low <= high and array[high] >= pivot:
+            high -= 1
+        while low <= high and array[low] <= pivot:
+            low += 1
+        if low <= high:
+            array[low], array[high] = array[high], array[low]
 
-#         while low <= high and array[low] <= pivot:
-#             low = low + 1
-#             if high < len(array):
-#                 update_graph(fig, array, low)
-#             else:
-#                 update_graph(fig, array, low)
+        if low <= high:
+            update_graph(fig, array, current_index=low, min_index=high)
+        else:
+            break
 
-#         if low <= high:
-#             array[low], array[high] = array[high], array[low]
-#             if high < len(array):
-#                 update_graph(fig, array, low)
-#             else:
-#                 update_graph(fig, array, low)
-#         else:
-#             break
+    array[start], array[high] = array[high], array[start]
+    update_graph(fig, array, current_index=high)
 
-#     array[start], array[high] = array[high], array[start]
+    return high
 
-#     return high
+def quick_vis(array, fig, start, end):
+    if start >= end:
+        return
 
-# def quick_vis(array, fig, start, end):
-#     if start >= end:
-#         # update_graph(fig, array, final=True)
-#         return
+    p = partition(fig, array, start, end)
+    quick_vis(array, fig, start, p-1)
+    quick_vis(array, fig, p+1, end)
+    
+    if is_sorted(array) == True:
+        update_graph(fig, array, final=True)
+        
+def odd_even_vis(arr,fig):
+    n = len(arr)
+    # Initially array is unsorted
+    isSorted = 0
+    while isSorted == 0:
+        isSorted = 1
+        temp = 0
+        for i in range(1, n-1, 2):
+            if arr[i] > arr[i+1]:
+                arr[i], arr[i+1] = arr[i+1], arr[i]
+                update_graph(fig, arr, i)
+                isSorted = 0
+                
+        for i in range(0, n-1, 2):
+            if arr[i] > arr[i+1]:
+                arr[i], arr[i+1] = arr[i+1], arr[i]
+                update_graph(fig, arr, i)
+                isSorted = 0
+    update_graph(fig, arr, final=True)
+        
+def gnome_vis(arr, fig, n): 
+    index = 0
+    while index < n: 
+        if index == 0: 
+            index = index + 1
+        if arr[index] >= arr[index - 1]: 
+            index = index + 1
+        else: 
+            arr[index], arr[index-1] = arr[index-1], arr[index] 
+            index = index - 1
+        update_graph(fig, arr, index-1)
+    update_graph(fig, arr, final=True)
 
-#     p = partition(fig, array, start, end)
-#     quick_vis(array, fig, start, p-1)
-#     quick_vis(array, fig, p+1, end)
+def cocktail_vis(arr, fig):
+    n = len(arr)
+    swapped = True
+    start = 0
+    end = n-1
+    while (swapped == True):
 
+        # reset the swapped flag on entering the loop,
+        # because it might be true from a previous
+        # iteration.
+        swapped = False
 
+        # loop from left to right same as the bubble
+        # sort
+        for i in range(start, end):
+            if (arr[i] > arr[i + 1]):
+                arr[i], arr[i + 1] = arr[i + 1], arr[i]
+                update_graph(fig, arr, i)
+                swapped = True
+
+        # if nothing moved, then array is sorted.
+        if (swapped == False):
+            break
+
+        # otherwise, reset the swapped flag so that it
+        # can be used in the next stage
+        swapped = False
+
+        # move the end point back by one, because
+        # item at the end is in its rightful spot
+        end = end-1
+
+        # from right to left, doing the same
+        # comparison as in the previous stage
+        for i in range(end-1, start-1, -1):
+            if (arr[i] > arr[i + 1]):
+                arr[i], arr[i + 1] = arr[i + 1], arr[i]
+                update_graph(fig, arr, i)
+                swapped = True
+
+        # increase the starting point, because
+        # the last stage would have moved the next
+        # smallest number to its rightful spot.
+        start = start + 1
+    update_graph(fig, arr, final=True)
+
+    
 
 
