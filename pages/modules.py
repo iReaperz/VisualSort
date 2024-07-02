@@ -65,27 +65,32 @@ def sorting_panel_ui(sort_type, default_code, desc, worst, space, best, average)
                             </div>'''),
                        class_ ='description'),
                 ui.div(
-                    ui.HTML(
-                        f'<div class="card_bot {sort_type.lower()}">'
-                        f'<div class="header">'
-                        f'<div class="top">'
-                        f'<div class="title">'
-                        f'</div>'
-                        f'</div>'
-                        f'</div>'
-                        f'<div class="code-container">'
-                        f'<div class="button-container">'
-                        f'<button class = "animated-button" onclick="showCode(\'python\', \'{sort_type.lower()}\')"><i class="fab fa-python"></i> Python</button>'
-                        f'<button class = "animated-button" onclick="showCode(\'java\', \'{sort_type.lower()}\')"><i class="fab fa-java"></i> Java</button>'
-                        f'<button class = "animated-button" onclick="showCode(\'cpp\', \'{sort_type.lower()}\')"><i class="fab fa-cuttlefish"></i> C++</button>'
-                        f'<button class = "animated-button" onclick="showCode(\'javascript\', \'{sort_type.lower()}\')"><i class="fab fa-js"></i> JavaScript</button>'
-                        f'</div>'
-                        f'<div class="textarea-container">'
-                        f'<textarea class="code {sort_type.lower()}-code area shiny-bound-input" id="code-{sort_type.lower()}" name="code" readonly="">{default_code}</textarea>'
-                        f'</div>'
-                        f'</div>'
-                        f'</div>'
-                    )
+ui.HTML(
+    f'<div class="card_bot {sort_type.lower()}">'
+    f'<div class="header">'
+    f'<div class="top">'
+    f'<div class="title">'
+    f'</div>'
+    f'</div>'
+    f'</div>'
+    f'<div class="code-container">'
+    f'<div class="button-container">'
+    f'<button class="animated-button" onclick="showCode(\'python\', \'{sort_type.lower()}\')"><i class="fab fa-python"></i> Python</button>'
+    f'<button class="animated-button" onclick="showCode(\'java\', \'{sort_type.lower()}\')"><i class="fab fa-java"></i> Java</button>'
+    f'<button class="animated-button" onclick="showCode(\'cpp\', \'{sort_type.lower()}\')"><i class="fab fa-cuttlefish"></i> C++</button>'
+    f'<button class="animated-button" onclick="showCode(\'javascript\', \'{sort_type.lower()}\')"><i class="fab fa-js"></i> JavaScript</button>'
+    f'</div>'
+    f'<div class="textarea-container" style="position: relative;">'
+    f'<textarea class="code {sort_type.lower()}-code area shiny-bound-input" id="code-{sort_type.lower()}" name="code" readonly="">{default_code}</textarea>'
+    f'<div class = "tooltip>'
+    f'<button class = "button-80" onclick="copyFunction()"><i class="fa fa-clone" aria-hidden="true"></i></button>'
+    f'<span class="tooltiptext" id="myTooltip">Copy to clipboard</span>'
+    f'</div>'
+    f'</div>'
+    f'</div>'
+    f'</div>'
+)
+
                 )
             ),
             ui.HTML(

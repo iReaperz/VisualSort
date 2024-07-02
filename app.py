@@ -3,6 +3,21 @@ from pages.modules import bubble_sort_ui, selection_sort_ui, cocktail_sort_ui, g
 
 
 js_code = '''
+        function copyFunction() {
+            /* Copy the text inside the textarea */
+            const textarea = document.querySelector('textarea');
+            textarea.select();
+            document.execCommand('copy');
+
+            /* Change tooltip text */
+            const tooltip = document.getElementById("myTooltip");
+            tooltip.innerHTML = "Copied!";
+            
+            /* Reset tooltip text after a delay */
+            setTimeout(() => {
+                tooltip.innerHTML = "Copy to clipboard";
+            }, 2000);
+        }
 function showCode(language, sortType) {
     var code = '';
     switch (language) {
