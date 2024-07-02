@@ -71,7 +71,7 @@ Open a web browser and go to [http://127.0.0.1:8000](http://127.0.0.1:8000) to s
 
 You can check the active demo by following this link:
 
-https://simonyannoy.shinyapps.io/clinical_trials_plots/
+[screen-capture.webm](https://github.com/iReaperz/VisualSort/assets/38584864/e95a44ad-3723-4086-a0e6-cff489d2a2c3)
 
 
 ## License
