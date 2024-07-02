@@ -551,7 +551,6 @@ app_ui = ui.page_navbar(
     odd_sort_ui("tab7"),
     id="tabs",
     header=ui.tags.head(
-        ui.tags.link(rel="icon", href="https://i.ibb.co/tBPLYFn/logo-cropped.png", type="image/png"),
         ui.tags.link(
             rel="stylesheet",
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"

@@ -8,7 +8,15 @@
     color: white;
     font-family: "Merriweather", serif;
 }
-
+.navbar.navbar-expand-md.navbar-light.bg-light{
+  background-color: rgb(14, 22, 33) !important;
+}
+.body{
+  background-color: rgb(14, 22, 33) !important;
+}
+.container-fluid{
+  background-color: rgb(14, 22, 33) !important;
+}
 .navbar-collapse{
     flex-grow: 0;
 }
