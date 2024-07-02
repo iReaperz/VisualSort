@@ -10,7 +10,7 @@ It provides an interactive way to understand and compare different sorting techn
 
 You can check the video
 
-[Demo Video]([https://github.com/iReaperz/VisualSort/assets/38584864/e95a44ad-3723-4086-a0e6-cff489d2a2c3](https://github.com/iReaperz/VisualSort/assets/38584864/22d70842-1e4b-4801-bf63-285e787b81a0)
+[Demo Video]([https://github.com/iReaperz/VisualSort/assets/38584864/e95a44ad-3723-4086-a0e6-cff489d2a2c3](https://github.com/iReaperz/VisualSort/assets/38584864/22d70842-1e4b-4801-bf63-285e787b81a0))
 
 Or follow the link bellow (visualization is not smooth due to the free server, please be patient).
 
