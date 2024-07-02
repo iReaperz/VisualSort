@@ -6,7 +6,13 @@ Description
 This project is a visualization tool for various sorting algorithms implemented in Python.
 It provides an interactive way to understand and compare different sorting techniques through visual representation.
 
-To install and run the project, follow these steps:
+## Demo
+
+You can check the video
+
+[screen-capture.webm](https://github.com/iReaperz/VisualSort/assets/38584864/e95a44ad-3723-4086-a0e6-cff489d2a2c3)
+
+Or follow the link bellow (visualization is not smooth due to the free server, please be patient).
 
 
 ## Installation
@@ -65,15 +71,6 @@ Open a web browser and go to [http://127.0.0.1:8000](http://127.0.0.1:8000) to s
 
 ● Odd Sort
 
-
-
-## Demo
-
-You can check the video
-
-[screen-capture.webm](https://github.com/iReaperz/VisualSort/assets/38584864/e95a44ad-3723-4086-a0e6-cff489d2a2c3)
-
-Or follow the link bellow (visualization is not smooth due to the free server, please be patient).
 
 [VisualSort](https://simonyannoy.shinyapps.io/visualsort/)
 
