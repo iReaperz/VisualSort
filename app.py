@@ -1,19 +1,15 @@
 from shiny import App, Inputs, Outputs, Session, reactive, ui
 from pages.modules import bubble_sort_ui, selection_sort_ui, cocktail_sort_ui, gnome_sort_ui, quick_sort_ui, insertion_sort_ui, odd_sort_ui, bubble_server, selection_server, insertion_server, quick_server, odd_server, gnome_server, cocktail_server
 
-
 js_code = '''
         function copyFunction() {
-            /* Copy the text inside the textarea */
             const textarea = document.querySelector('textarea');
             textarea.select();
             document.execCommand('copy');
 
-            /* Change tooltip text */
             const tooltip = document.getElementById("myTooltip");
             tooltip.innerHTML = "Copied!";
             
-            /* Reset tooltip text after a delay */
             setTimeout(() => {
                 tooltip.innerHTML = "Copy to clipboard";
             }, 2000);
@@ -544,6 +540,7 @@ function partition(arr, left, right) {
 }
 
 '''
+
 app_ui = ui.page_navbar(
     bubble_sort_ui("tab1"),
     selection_sort_ui("tab2"),
@@ -554,6 +551,7 @@ app_ui = ui.page_navbar(
     odd_sort_ui("tab7"),
     id="tabs",
     header=ui.tags.head(
+        ui.tags.link(rel="icon", href="https://i.ibb.co/tBPLYFn/logo-cropped.png", type="image/png"),
         ui.tags.link(
             rel="stylesheet",
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -569,6 +567,7 @@ app_ui = ui.page_navbar(
         )
     )
 )
+
 
 
 def server(input: Inputs, output: Outputs, session: Session):

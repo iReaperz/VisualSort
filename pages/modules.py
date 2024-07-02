@@ -629,3 +629,5 @@ def cocktail_server(input: Inputs, output: Outputs, session: Session):
         fig.update_yaxes(fixedrange=True, visible=False)
         fig.data[0].marker.line.width = 0
         fig.data[0].marker.color = 'rgb(33, 58, 72)'
+
+
